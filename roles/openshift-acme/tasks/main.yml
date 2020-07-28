@@ -1,0 +1,7 @@
+---
+
+# https://github.com/tnozicka/openshift-acme/tree/master/deploy#cluster-wide
+
+# oc new-project openshift-acme
+# oc apply -n openshift-acme -fhttps://raw.githubusercontent.com/tnozicka/openshift-acme/master/deploy/cluster-wide/{clusterrole,serviceaccount,issuer-letsencrypt-live,deployment}.yaml
+# oc create clusterrolebinding openshift-acme -n openshift-acme --clusterrole=openshift-acme --serviceaccount="$( oc project -q ):openshift-acme" --dry-run -o yaml | oc apply -f -
