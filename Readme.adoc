@@ -1,0 +1,7 @@
+= OpenShift User Provisioned Host
+
+== Purpose
+
+Purpose of this ansible is to supplement link:https://github.com/kxr/ocp4_setup_upi_kvm/[this ansible] that automates the provisioning of an OCP 4 cluster.
+
+== Procedure
