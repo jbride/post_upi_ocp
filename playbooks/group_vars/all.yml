@@ -1,0 +1,11 @@
+---
+  
+home_dir: "{{ playbook_dir }}/.."
+
+# resources dir
+resources_base_dir: "{{ home_dir }}/resources"
+
+# oc executable
+openshift_cli: oc
+
+work_dir: /tmp/openshift_upi_host
