@@ -1,0 +1,6 @@
+---
+
+# Create route to OCP internal container image registry
+- shell: |
+    {{ openshift_cli }} patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
+
