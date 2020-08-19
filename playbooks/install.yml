@@ -8,3 +8,4 @@
   roles:
     - name: idm
     - name: internal_registry
+    - name: wildcard_cert

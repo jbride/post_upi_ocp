@@ -1,0 +1,23 @@
+---
+
+# reference
+#     https://www.openshift.com/blog/requesting-and-installing-lets-encrypt-certificates-for-openshift-4
+
+# namecheap APIs
+#    reference
+#        https://www.namecheap.com/support/api/intro/
+#    only enabled if have $50 of purchases
+#
+#    export NAMECHEAP_SOURCEIP=x.x.x.x
+#    export NAMECHEAP_USERNAME="x"
+#    export NAMECHEAP_API_KEY="x"
+#    curl "https://api.namecheap.com/xml.response?ApiUser=$NAMECHEAP_USERNAME&ApiKey=$NAMECHEAP_API_KEY&UserName=$NAMECHEAP_USERNAME&ClientIp=$NAMECHEAP_SOURCEIP&Command=namecheap.domains.check&DomainList=ratwater.xyz"
+
+
+- name: Create secret
+  shell: |
+    oc create secret tls router-certs --cert={{ WILDCARD_CERTDIR }}/fullchain.pem --key={{ WILDCARD_CERTDIR }}/key.pem -n openshift-ingress
+
+- name: Patch IngressController
+  shell: |
+    oc patch ingresscontroller default -n openshift-ingress-operator --type=merge --patch='{"spec": { "defaultCertificate": { "name": "router-certs" }}}'
