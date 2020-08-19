@@ -14,10 +14,10 @@
 #    curl "https://api.namecheap.com/xml.response?ApiUser=$NAMECHEAP_USERNAME&ApiKey=$NAMECHEAP_API_KEY&UserName=$NAMECHEAP_USERNAME&ClientIp=$NAMECHEAP_SOURCEIP&Command=namecheap.domains.check&DomainList=ratwater.xyz"
 
 
-- name: Create secret
+- name: Create secret in {{ ingress-controller-namespace }}
   shell: |
-    oc create secret tls router-certs --cert={{ WILDCARD_CERTDIR }}/fullchain.pem --key={{ WILDCARD_CERTDIR }}/key.pem -n openshift-ingress
+    oc create secret tls router-certs --cert={{ WILDCARD_CERTDIR }}/fullchain.cer --key={{ WILDCARD_CERTDIR }}/{{ WILDCARD_KEY_NAME }} -n {{ ingress-controller-namespace }}
 
-- name: Patch IngressController
+- name: Patch IngressController in {{ ingress-controller-namespace }}
   shell: |
-    oc patch ingresscontroller default -n openshift-ingress-operator --type=merge --patch='{"spec": { "defaultCertificate": { "name": "router-certs" }}}'
+    oc patch ingresscontroller default -n {{ ingress-controller-namespace }} --type=merge --patch='{"spec": { "defaultCertificate": { "name": "router-certs" }}}'

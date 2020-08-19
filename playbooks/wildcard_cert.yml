@@ -11,7 +11,7 @@
         work_dir_name: wildcard_certs 
         resources_dir: "{{ resources_base_dir }}/wildcard_certs"
     - include_role:
-        name: ../roles/wildcard_certs
+        name: ../roles/wildcard_cert
       when: >
         ACTION is not defined or
         ACTION is none or

@@ -1,0 +1,5 @@
+---
+
+ingress-controller-namespace: openshift-ingress-operator
+WILDCARD_CERTDIR: 
+WILDCARD_KEY_NAME: 
