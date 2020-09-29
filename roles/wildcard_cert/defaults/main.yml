@@ -1,5 +1,6 @@
 ---
 
+ingress_namespace: openshift-ingress
 ingress_controller_namespace: openshift-ingress-operator
 WILDCARD_CERTDIR: changeme
 WILDCARD_KEY_NAME: changeme
