@@ -4,5 +4,5 @@
 
 -----
 $ cp inventories/inventory.template inventories/inventory
-$ ansible-playbook -i localhost, -c local playbooks/install.yml
+$ ansible-playbook -i inventories/inventory playbooks/install.yml
 -----
