@@ -1,6 +1,6 @@
 ---
 
-- hosts: all
+- hosts: localhost
   become: false
   gather_facts: False
   run_once: true

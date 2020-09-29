@@ -1,3 +1,4 @@
 [all:vars]
 
-WILDCARD_CERTDIR: 
+WILDCARD_CERTDIR=changeme
+WILDCARD_KEY_NAME=changeme
