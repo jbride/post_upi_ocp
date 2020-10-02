@@ -2,5 +2,5 @@
 
 WILDCARD_CERTDIR=changeme
 WILDCARD_KEY_NAME=changeme
-API_CERTDIR: changeme
-API_KEY_NAME: changeme
+API_CERTDIR=changeme
+API_KEY_NAME=changeme
