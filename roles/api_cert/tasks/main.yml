@@ -1,4 +1,16 @@
 ---
 
-# https://github.com/redhat-cop/openshift-lab-origin/blob/master/OpenShift4/Lets_Encrypt_Certificates_for_OCP4.adoc#installing-certificates-for-the-api
+# reference
+#   https://github.com/redhat-cop/openshift-lab-origin/blob/master/OpenShift4/Lets_Encrypt_Certificates_for_OCP4.adoc#installing-certificates-for-the-api
+#   https://www.openshift.com/blog/requesting-and-installing-lets-encrypt-certificates-for-openshift-4
+
+- name: "Create secret in {{ config_namespace }}"
+  shell: |
+    oc create secret tls api-certs --cert={{ API_CERTDIR }}/fullchain.cer --key={{ API_CERTDIR }}/{{ API_KEY_NAME }} -n {{ config_namespace }}
+
+- name: Patch API Server Custom Resource
+  shell: |
+    oc patch apiserver cluster --type=merge --patch='{"spec": {"servingCerts": {"namedCertificates": [{"names": [" 'api.ratwater.xyz' "], "servingCertificate": {"name": "api-certs"}}]}}}'
+
+# TO-DO:  Check status of router pods in openshift-ingress namespace
 

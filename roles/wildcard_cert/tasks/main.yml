@@ -1,17 +1,8 @@
 ---
 
 # reference
+#     https://github.com/redhat-cop/openshift-lab-origin/blob/master/OpenShift4/Lets_Encrypt_Certificates_for_OCP4.adoc#installing-certificates-for-the-api
 #     https://www.openshift.com/blog/requesting-and-installing-lets-encrypt-certificates-for-openshift-4
-
-# namecheap APIs
-#    reference
-#        https://www.namecheap.com/support/api/intro/
-#    only enabled if have $50 of purchases
-#
-#    export NAMECHEAP_SOURCEIP=x.x.x.x
-#    export NAMECHEAP_USERNAME="x"
-#    export NAMECHEAP_API_KEY="x"
-#    curl "https://api.namecheap.com/xml.response?ApiUser=$NAMECHEAP_USERNAME&ApiKey=$NAMECHEAP_API_KEY&UserName=$NAMECHEAP_USERNAME&ClientIp=$NAMECHEAP_SOURCEIP&Command=namecheap.domains.check&DomainList=ratwater.xyz"
 
 
 - name: Create secret in {{ ingress_namespace }}

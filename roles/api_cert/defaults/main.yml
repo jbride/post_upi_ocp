@@ -1,0 +1,5 @@
+---
+
+config_namespace: openshift-config
+API_CERTDIR: changeme
+API_KEY_NAME: changeme
