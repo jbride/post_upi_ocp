@@ -12,5 +12,5 @@
   shell: |
     oc patch apiserver cluster --type=merge --patch='{"spec": {"servingCerts": {"namedCertificates": [{"names": [" 'api.ratwater.xyz' "], "servingCertificate": {"name": "api-certs"}}]}}}'
 
-# TO-DO:  Check status of router pods in openshift-ingress namespace
+# TO-DO:  Check status of pods pods in openshift-kube-apiserver namespace
 
