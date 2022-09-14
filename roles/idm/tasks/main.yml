@@ -1,5 +1,6 @@
 ---
 
+
 - set_fact:
     user_status: '\{\{.metadata.name\}\}'
 - set_fact:
@@ -12,6 +13,16 @@
 
 - block:
   # As per: https://docs.openshift.com/container-platform/4.2/authentication/identity_providers/configuring-htpasswd-identity-provider.html
+   
+  # Alternative:
+  #   $ oc extract secret/htpass-secret -n openshift-config --to /tmp
+  #   $ cat {{ resources_base_dir}}/idm/users_and_admins.htpasswd >> /tmp/htpasswd
+  #   $ oc set data secret/htpass-secret --from-file htpasswd=/tmp/htpasswd -n openshift-config 
+  #
+  # Wait until operator in "openshift-authentication-operator" detects change and restarts pods in "openshift-authentication"
+  #
+  # Benefit:  Would not need to modify default Oauth provider
+  
   - name: Augment OAuth identity provider with a additional admin users for control plane
     shell: |
       oc create secret generic idm-admins-secret --from-file=htpasswd={{ resources_base_dir }}/idm/users_and_admins.htpasswd -n openshift-config 
