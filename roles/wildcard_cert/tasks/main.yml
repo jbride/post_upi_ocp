@@ -1,8 +1,7 @@
 ---
 
 # reference
-#     https://github.com/redhat-cop/openshift-lab-origin/blob/master/OpenShift4/Lets_Encrypt_Certificates_for_OCP4.adoc#installing-certificates-for-the-api
-#     https://www.openshift.com/blog/requesting-and-installing-lets-encrypt-certificates-for-openshift-4
+#   https://docs.openshift.com/container-platform/4.11/security/certificates/replacing-default-ingress-certificate.html
 
 
 - name: Create secret in {{ ingress_namespace }}
@@ -11,6 +10,6 @@
 
 - name: Patch IngressController in {{ ingress_controller_namespace }}
   shell: |
-    oc patch ingresscontroller default -n {{ ingress_controller_namespace }} --type=merge --patch='{"spec": { "defaultCertificate": { "name": "router-certs" }}}'
+    oc patch ingresscontroller default -n {{ ingress_controller_namespace }} --type=merge --patch='{"spec": { "defaultCertificate": { "name": "router-certs" }}} -n openshift-ingress-operator'
 
 # TO-DO:  Check status of router pods in openshift-ingress namespace

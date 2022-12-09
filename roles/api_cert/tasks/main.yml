@@ -1,9 +1,10 @@
 ---
 
 # reference
-#   https://github.com/redhat-cop/openshift-lab-origin/blob/master/OpenShift4/Lets_Encrypt_Certificates_for_OCP4.adoc#installing-certificates-for-the-api
-#   https://www.openshift.com/blog/requesting-and-installing-lets-encrypt-certificates-for-openshift-4
+#   https://docs.openshift.com/container-platform/4.11/security/certificates/api-server.html
 
+# Manual Example: 
+#   oc create secret tls api-certs --cert=/root/.acme.sh/api.den-east.ratwater.xyz/fullchain.cer --key=/root/.acme.sh/api.den-east.ratwater.xyz/api.den-east.ratwater.xyz.key -n openshift-config
 - name: "Create secret in {{ config_namespace }}"
   shell: |
     oc create secret tls api-certs --cert={{ API_CERTDIR }}/fullchain.cer --key={{ API_CERTDIR }}/{{ API_KEY_NAME }} -n {{ config_namespace }}
@@ -13,4 +14,8 @@
     oc patch apiserver cluster --type=merge --patch='{"spec": {"servingCerts": {"namedCertificates": [{"names": [" 'api.ratwater.xyz' "], "servingCertificate": {"name": "api-certs"}}]}}}'
 
 # TO-DO:  Check status of pods pods in openshift-kube-apiserver namespace
+# Check the kube-apiserver operator, and verify that a new revision of the Kubernetes API server rolls out.
+# It may take a minute for the operator to detect the configuration change and trigger a new deployment.
+# While the new revision is rolling out, PROGRESSING will report True.
+# oc get clusteroperators kube-apiserver
 
