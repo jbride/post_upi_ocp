@@ -8,8 +8,8 @@
   shell: |
     oc create secret tls router-certs --cert={{ WILDCARD_CERTDIR }}/fullchain.cer --key={{ WILDCARD_CERTDIR }}/{{ WILDCARD_KEY_NAME }} -n {{ ingress_namespace }}
 
-- name: Patch IngressController in {{ ingress_controller_namespace }}
+- name: "Patch IngressController in {{ ingress_controller_namespace }}"
   shell: |
-    oc patch ingresscontroller default -n {{ ingress_controller_namespace }} --type=merge --patch='{"spec": { "defaultCertificate": { "name": "router-certs" }}} -n openshift-ingress-operator'
+    oc patch ingresscontroller default --type=merge --patch='{"spec": { "defaultCertificate": { "name": "router-certs" }}}' -n openshift-ingress-operator
 
 # TO-DO:  Check status of router pods in openshift-ingress namespace
